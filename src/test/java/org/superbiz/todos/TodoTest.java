@@ -6,8 +6,12 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.GenericArchive;
+import org.jboss.shrinkwrap.api.Node;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,12 +32,14 @@ public class TodoTest {
 
     @Deployment
     public static WebArchive createDeployment() {
+        GenericArchive webAppDirectory = ShrinkWrap
+                .create(GenericArchive.class).as(ExplodedImporter.class)
+                .importDirectory("src/main/resources/app").as(GenericArchive.class);
+
         return ShrinkWrap.create(WebArchive.class, "angular-test.war")
                          .addClasses(ApplicationConfig.class, UiApplication.class)
-                         .addAsWebResource("app/index.html", "index.html")
-                         .addAsWebResource("app/app.js", "app.js")
-                         .addAsWebResource("app/todo.js", "todo.js")
-                         .addAsWebResource("app/lib/angular.js", "lib/angular.js")
+                         .merge(webAppDirectory, "/",
+                                 Filters.include(".*\\.(js|css|html|xml)$"))
                          .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-angular.module('todo.controller', []).controller('TodoCtrl', function($scope, $http) {
+angular.module('todo.controller', []).controller('TodoCtrl', function($scope, $http, $q) {
   $scope.todos = [];
 
   var refresh = function() {$http.get('rest/todos')
@@ -43,11 +43,14 @@ angular.module('todo.controller', []).controller('TodoCtrl', function($scope, $h
   $scope.archive = function() {
     var oldTodos = $scope.todos;
     $scope.todos = [];
+    var deletes = [];
     angular.forEach(oldTodos, function(todo) {
       if (!todo.done) {
-        $http.delete('rest/todos/'+todo.text);
+        deletes.push($http.delete('rest/todos/'+todo.text));
       }
     });
-    refresh();
+    $q.all(deletes).then(function() {
+        refresh();
+    });
   };
 });

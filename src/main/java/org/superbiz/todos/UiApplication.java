@@ -40,7 +40,7 @@ public class UiApplication {
         StringWriter content = new StringWriter();
         JsonWriter writer = Json.createWriter(content);
         writer.writeArray(arrayBuilder.build());
-
+        System.out.println(content.toString());
         return Response.ok(content.toString()).build();
     }
 
@@ -58,6 +58,7 @@ public class UiApplication {
         if(text.isPresent()) {
             listOfTodos.remove(text.get());
         }
+        System.out.println(listOfTodos.size());
         return Response.noContent().build();
     }
 }
