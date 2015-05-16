@@ -12,7 +12,9 @@ import org.jboss.shrinkwrap.api.Node;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +42,8 @@ public class TodoTest {
                          .addClasses(ApplicationConfig.class, UiApplication.class)
                          .merge(webAppDirectory, "/",
                                  Filters.include(".*\\.(js|css|html|xml)$"))
+                         .addAsLibraries(Maven.resolver().resolve("org.glassfish:javax.json:1.0.4")
+                                 .withTransitivity().as(JavaArchive.class))
                          .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 

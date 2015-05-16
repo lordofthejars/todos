@@ -14,8 +14,6 @@
         <browser>phantomjs</browser>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <assertj-core.version>1.7.1</assertj-core.version>
-        <guava.version>18.0</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -91,20 +89,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj-core.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>javaee-api</artifactId>
             <version>6.0-6</version>
@@ -135,12 +119,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>webdriver-chrome</id>
-            <properties>
-                <browser>chrome</browser>
-            </properties>
-        </profile>
 
         <profile>
             <id>webdriver-firefox</id>
@@ -150,9 +128,16 @@
         </profile>
 
         <profile>
-            <id>webdriver-opera</id>
+            <id>webdriver-phantomjs</id>
             <properties>
-                <browser>opera</browser>
+                <browser>phantomjs</browser>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>webdriver-safari</id>
+            <properties>
+                <browser>safari</browser>
             </properties>
         </profile>
     </profiles>
