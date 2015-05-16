@@ -24,5 +24,12 @@
     <extension qualifier="webdriver">
         <property name="browser">${browser}</property>
     </extension>
+    <extension qualifier="screenshooter">
+        <property name="takeBeforeTest">true</property>
+        <property name="takeAfterTest">true</property>
+    </extension>
+    <extension qualifier="reporter">
+        <property name="report">html</property>
+    </extension>
 
 </arquillian>
