@@ -27,9 +27,10 @@
     <extension qualifier="screenshooter">
         <property name="takeBeforeTest">true</property>
         <property name="takeAfterTest">true</property>
+        <property name="takeOnEveryAction">true</property>
     </extension>
     <extension qualifier="reporter">
-        <property name="report">html</property>
+        <property name="report">html5</property>
     </extension>
 
 </arquillian>

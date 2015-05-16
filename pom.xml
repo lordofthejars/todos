@@ -132,7 +132,6 @@
     </build>
 
     <profiles>
-
         <profile>
             <id>webdriver-firefox</id>
             <properties>
