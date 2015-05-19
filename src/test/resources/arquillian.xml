@@ -31,6 +31,7 @@
     </extension>
     <extension qualifier="reporter">
         <property name="report">html5</property>
+        <property name="maxImageWidth">2000</property>
     </extension>
 
 </arquillian>
